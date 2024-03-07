@@ -1,0 +1,88 @@
+:root {
+  --theme-color: black;
+  --gray: #555;
+  --gray-75: #3b3b4f;
+  --gray-90: #222;
+  --btn-gap: 1px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.message {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  max-width: 45rem;
+}
+
+.message_text {
+  padding-left: 1rem;
+  margin-left: 1rem;
+  color: var(--theme-color);
+  border-left: 0.2rem solid var(--theme-color);
+}
+
+@media (max-width: 45rem) {
+  .message {
+    flex-flow: column nowrap;
+  }
+}
+
+.hojas {
+    top: 16px;
+    width: 150px;
+    left: 70px;
+    transform: rotate(22deg);
+}
+.tomato,
+.hojas {
+  position: absolute;
+  top: 0;
+}
+
+.tomato {
+  width: 300px;
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .flex--align-start {
+    align-items: flex-start;
+  }
+  .flex--justify-center {
+    justify-content: center;
+  }
+  .flex__item {
+    flex: 50%;
+  }
+
+  body {
+    margin: 0;
+  }
+  
+  #root {
+    margin-left: 120px;
+  }
+  
+  .container {
+    background-color: var(--gray-90);  
+    font-family: sans;
+  }
+
+.relative {
+    position: relative;
+    min-height: 271px;
+    width: 300px;
+  }

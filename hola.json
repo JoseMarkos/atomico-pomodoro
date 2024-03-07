@@ -1,0 +1,11 @@
+{
+  "name": "atomico",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "marcos",
+  "license": "ISC"
+}
