@@ -79,8 +79,12 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   }, [timerActive]);
 
   useEffect(() => {
-    setTimeLeft(sessionT * 60)
-  },[sessionT]);
+    if ('Session' === label) {
+      setTimeLeft(sessionT * 60);
+    } else {
+      setTimeLeft(breakT * 60);
+    }
+  },[sessionT, breakT]);
 
   const startTimer = () => {
     setTimerActive(timerActive + 1);
