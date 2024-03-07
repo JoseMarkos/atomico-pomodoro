@@ -1,4 +1,4 @@
-import { c, css, useContext, useState } from 'atomico'; // Asegúrate de importar las funciones necesarias de 'atomico'
+import { c, css, useContext, useState } from 'atomico';
 import { settingsContext } from '../atomico-pomodoro/atomico-pomodoro';
 
 const settingsPopup = () => {
@@ -7,8 +7,7 @@ const settingsPopup = () => {
     updateBreakTime, 
     updateSessionTime, 
     sessionTime, 
-    breakTime,
-    timeLeft
+    breakTime
   } = useContext(settingsContext);
   const [sessionTimeLocal, setSessionTimeLocal] = useState(sessionTime);
   const [breakTimeLocal, setBreakTimeLocal] = useState(breakTime);
@@ -62,7 +61,6 @@ const settingsPopup = () => {
               number={breakTimeLocal}
             />
         </section>
-        {/* Aquí puedes agregar las opciones de configuración */}
         <button onclick={closePopup}>Cerrar</button>
       </dialog>
     </host>
