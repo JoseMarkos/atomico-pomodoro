@@ -183,20 +183,14 @@ pomodoro.styles = css`
     min-width: 50px;
   }
 
-  .relative {
-    position: relative;
-    min-height: 271px;
-    width: 300px;
+  h3 {
+    margin: 0;
   }
 
   .number {
     font-weight: 200;
     letter-spacing: 3px;
-  }
-
-  h3 {
-    margin: 0;
-  }
+ }
 
   .timer {
     background: linear-gradient(to right, red, purple);
@@ -213,6 +207,11 @@ pomodoro.styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  
+  .flex {
+    display: flex;
+    gap: 0.5rem;
   }
 `;
 
@@ -241,7 +240,7 @@ function pomodoroCounter({ id, title, decrement, number, increment }: Props<type
                 -
                 </button>
                 <span id={`${id}-length`} class="number">{number}</span>
-                <button 
+                <button
                     class="btn"
                     type="button" 
                     id={`${id}-increment`}
@@ -264,67 +263,47 @@ pomodoroCounter.props = {
 }
 
 pomodoroCounter .styles = css`
-:root {
-  --gray: #555;
-  --gray-75: #3b3b4f;
-  --gray-90: #222;
-  --btn-gap: 1px;
-}
+  :root {
+    --gray: #555;
+    --gray-75: #3b3b4f;
+    --gray-90: #222;
+    --btn-gap: 1px;
+  }
 
-.btn {
-  background-color: transparent;
-  border: 3px solid #555;
-  border-radius: 50%;
-  color: inherit;
-  cursor: pointer;
-  font-size: 1rem;
-  min-height: 30px;
-  min-width: 30px;
-}
+  .btn {
+    background-color: transparent;
+    border: 3px solid #555;
+    border-radius: 50%;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    min-height: 30px;
+    min-width: 30px;
+  }
 
-.btn:hover {
-  border-color: tomato;
-}
+  .btn:hover {
+    border-color: tomato;
+  }
 
-.btn--control {
-  min-height: 50px;
-  min-width: 50px;
-}
+  .btn--control {
+    min-height: 50px;
+    min-width: 50px;
+  }
 
-.relative {
-  position: relative;
-  min-height: 271px;
-  width: 300px;
-}
+  .number {
+    font-weight: 200;
+    letter-spacing: 3px;
+  }
 
-.number {
-  font-weight: 200;
-  letter-spacing: 3px;
-}
-
-h3 {
-  margin: 0;
-}
-
-.timer {
-  background: linear-gradient(to right, red, purple);
-  padding: 3px;
-  border-radius: 50%;
-}
-
-.timer__body {
-  background-color: var(--gray-90);
-  height: 203px;
-  width: 203px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
   .flex {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
+  }
+
+  h5 {
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 `;
   

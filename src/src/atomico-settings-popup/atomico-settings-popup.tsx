@@ -22,7 +22,7 @@ const settingsPopup = () => {
 
   return (
     <host shadowDom>
-      <button onclick={togglePopup}>Abrir configuración</button>
+      <button onclick={togglePopup}>Configurar</button>
       <dialog open={showPopup} onclose={closePopup} class="">
         <h2>Configuración</h2>
         <section class="flex">
@@ -80,11 +80,12 @@ settingsPopup.styles = css`
     border: 2px solid tomato;
     box-shadow: 0 0 20px black;
     color: white;
+    padding: 2rem;
     z-index: 2000;
   }
 
   dialog > * {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   dialog > *:last-child {
@@ -92,15 +93,25 @@ settingsPopup.styles = css`
   }
 
   button {
-    background-color: tomato;
-    color: #eee;
-    padding: 10px;
+    background: linear-gradient(to right, red, purple);
+    color: #ddd;
+    padding: 14px;
     border: 0  none;
+    text-shadow: black 1px 1px 2px;
+    font-size: 1rem;
+    font-family: sans;
+    cursor: pointer;
+    border-radius: 20px;
   }
 
   .flex {
     display: flex;
     gap: 0.5rem;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
   }
 `;
 
