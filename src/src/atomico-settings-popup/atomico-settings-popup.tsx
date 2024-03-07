@@ -22,7 +22,7 @@ const settingsPopup = () => {
 
   return (
     <host shadowDom>
-      <button onclick={togglePopup}>Configurar</button>
+      <button class="fixed" onclick={togglePopup}>Configurar</button>
       <dialog open={showPopup} onclose={closePopup} class="">
         <h2>Configuración</h2>
         <section class="flex">
@@ -61,7 +61,7 @@ const settingsPopup = () => {
               number={breakTimeLocal}
             />
         </section>
-        <button onclick={closePopup}>Cerrar</button>
+        <button class="btn--block" onclick={closePopup}>Cerrar</button>
       </dialog>
     </host>
   );
@@ -112,6 +112,17 @@ settingsPopup.styles = css`
   h2 {
     margin-top: 0;
     margin-bottom: 2rem;
+  }
+
+  .btn--block {
+    display: block;
+    width: 100%;
+  }
+
+  .fixed {
+    position: fixed;
+    right: 2rem;
+    top: 2rem;
   }
 `;
 

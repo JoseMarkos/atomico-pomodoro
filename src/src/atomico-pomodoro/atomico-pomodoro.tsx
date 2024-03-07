@@ -159,7 +159,7 @@ pomodoro.styles = css`
     line-height: 1.1;
     display:flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
   }
 

@@ -73,12 +73,13 @@ body {
   }
   
   #root {
-    margin-left: 120px;
+    /* margin-left: 120px; */
   }
   
   .container {
     background-color: var(--gray-90);  
     font-family: sans;
+    /* padding-top: 6rem; */
   }
 
 .relative {
