@@ -121,21 +121,22 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                     }
                     </button>
                     <button
-                    class="btn btn--control"
-                    type="button"
-                    id="reset"
-                    onclick={() => {
+                      class="btn btn--control"
+                      type="button"
+                      id="reset"
+                      onclick={() => {
                         stopBeep();
                         stopTimer();
-                        setTimeLeft(sessionTime * 60);
-                    }}
-                    >  
+                        setTimeLeft(sessionT * 60);
+                      }}
+                    >
                     <i class="fa fa-arrow-rotate-right">R</i>
                     </button>
                 </section>
                 </div>
             </div>
         </atomico-settings-context>
+        ww
     </host>
   );
 }
