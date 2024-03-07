@@ -27,6 +27,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   const updateBreakTime = (time: number) => {
     setBreakT(time);
   };
+
   const updateSessionTime = (time: number) => {
     setSessionT(time);
   };
@@ -39,12 +40,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     return minutesStr + ':' + secondsStr;
   };
   
-  // play beep
   const playBeep = () => {
     beep.play();
   };
 
-  // pause beep 
   const stopBeep = () => {
     beep.pause();
   };
@@ -136,7 +135,6 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                 </div>
             </div>
         </atomico-settings-context>
-        ww
     </host>
   );
 }
