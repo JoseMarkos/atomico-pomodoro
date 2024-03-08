@@ -31,7 +31,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     beep.play();
   };
 
-  const stopBeep = () => {
+  const pauseBeep = () => {
     beep.pause();
   };
 
@@ -112,7 +112,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       type="button"
                       id="reset"
                       onclick={() => {
-                        stopBeep();
+                        pauseBeep();
                         stopTimer();
                         setTimeLeft(sessionT * 60);
                       }}
