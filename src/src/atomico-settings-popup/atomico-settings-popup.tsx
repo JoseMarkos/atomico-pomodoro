@@ -123,6 +123,7 @@ settingsPopup.styles = css`
     position: fixed;
     right: 2rem;
     top: 2rem;
+    z-index: 2000;
   }
 `;
 
