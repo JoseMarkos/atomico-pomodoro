@@ -45,6 +45,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
           } else {
             clearInterval(intervalId);
             playBeep();
+            setTimerActive(0);
             if ('Session' === label) {
               setLabel('Break');
 
@@ -63,6 +64,9 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   }, [timerActive]);
 
   useEffect(() => {
+    if (timerActive) {
+      return;
+    }
     if ('Session' === label) {
       setTimeLeft(sessionT * 60);
     } else {
