@@ -1,24 +1,14 @@
-import {c, css, Props, useState, useEffect, createContext, useContext} from 'atomico';
-
-// Settings
-export const settingsContext = createContext({
-    breakTime: 1,
-    sessionTime: 2,
-    timeLeft: 1,
-    updateBreakTime: (time: number) => {
-    },
-    updateSessionTime: (time: number) => {
-    }
-});
-
-customElements.define( "atomico-settings-context", settingsContext  );
+import {c, css, Props, useState, useEffect, useContext} from 'atomico';
+import { SettingsContext, Theme } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
 
 function pomodoro({ beep } : Props<typeof pomodoro>) {
   // Start Atomicity
   const [label, setLabel] = useState('Session');
-  const {sessionTime, breakTime} = useContext(settingsContext);
+  const {sessionTime, breakTime} = useContext(SettingsContext);
+  // const theme = useContext(Theme);
+  console.log( 'hola');
   const [timeLeft, setTimeLeft] = useState(sessionTime * 60); // Tiempo en segundos
-  console.log(timeLeft);
+  console.log(timeLeft, "time left");
   const [timerActive, setTimerActive] = useState(0);
   const [breakT, setBreakT] = useState(breakTime);
   const [sessionT, setSessionT] = useState(sessionTime);
@@ -110,18 +100,18 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                 <h4 id="time-left" class="number">{timeFormat()}</h4>
                 <section class="flex">
                     <button
-                    class="btn btn--control"
-                    type="button"
-                    id="start_stop"
-                    onclick={() => {
-                        startTimer();
-                        }
-                    }
+                      class="btn btn--control"
+                      type="button"
+                      id="start_stop"
+                      onclick={() => {
+                          startTimer();
+                          }
+                      }
                     >
-                    {0 > timeLeft 
-                        ? <i class="fa fa-pause">Pause</i> 
-                        : <i class="fa fa-play">Play</i>
-                    }
+                      {0 > timeLeft 
+                          ? <i class="fa fa-pause">Pause</i> 
+                          : <i class="fa fa-play">Play</i>
+                      }
                     </button>
                     <button
                       class="btn btn--control"
@@ -133,7 +123,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                         setTimeLeft(sessionT * 60);
                       }}
                     >
-                    <i class="fa fa-arrow-rotate-right">R</i>
+                      <i class="fa fa-arrow-rotate-right">R</i>
                     </button>
                 </section>
                 </div>
@@ -144,18 +134,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
 }
 
 pomodoro.styles = css`
-  :root {
-    --gray: #555;
-    --gray-75: #3b3b4f;
-    --gray-90: #222;
-    --btn-gap: 1px;
-  }
-
   :host {
     box-sizing: border-box;
     color: white;
     padding: 2rem 1rem;
-    min-height: 100vh;
     line-height: 1.1;
     display:flex;
     justify-content: center;
@@ -190,7 +172,7 @@ pomodoro.styles = css`
   .number {
     font-weight: 200;
     letter-spacing: 3px;
- }
+  }
 
   .timer {
     background: linear-gradient(to right, red, purple);
@@ -199,7 +181,7 @@ pomodoro.styles = css`
   }
 
   .timer__body {
-    background-color: var(--gray-90);
+    background-color: #222;
     height: 203px;
     width: 203px;
     border-radius: 50%;
@@ -213,6 +195,12 @@ pomodoro.styles = css`
     display: flex;
     gap: 0.5rem;
   }
+
+  @media (min-width: 768px) {
+     :host {
+      min-height: 100vh;
+    }
+  }
 `;
 
 // const beepAudioElement = new Audio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav');
@@ -225,89 +213,5 @@ pomodoro.props = {
   } 
 }
 
-function pomodoroCounter({ id, title, decrement, number, increment }: Props<typeof pomodoroCounter>) {
-  return (
-    <host shadowDom>
-        <div class="counter" id={id}>
-            <h5 id={`${id}-label`}>{title}</h5>
-            <section class="flex">
-                <button
-                    class="btn"
-                    type="button"
-                    id={`${id}-decrement`}
-                    onclick={decrement}
-                >
-                -
-                </button>
-                <span id={`${id}-length`} class="number">{number}</span>
-                <button
-                    class="btn"
-                    type="button" 
-                    id={`${id}-increment`}
-                    onclick={increment}
-                >
-                +
-                </button>
-            </section>
-        </div>
-    </host>
-  )
-};
-
-pomodoroCounter.props = {
-  number: Number,
-  id: String,
-  title: String,
-  increment: Function,
-  decrement: Function
-}
-
-pomodoroCounter .styles = css`
-  :root {
-    --gray: #555;
-    --gray-75: #3b3b4f;
-    --gray-90: #222;
-    --btn-gap: 1px;
-  }
-
-  .btn {
-    background-color: transparent;
-    border: 3px solid #555;
-    border-radius: 50%;
-    color: inherit;
-    cursor: pointer;
-    font-size: 1rem;
-    min-height: 30px;
-    min-width: 30px;
-  }
-
-  .btn:hover {
-    border-color: tomato;
-  }
-
-  .btn--control {
-    min-height: 50px;
-    min-width: 50px;
-  }
-
-  .number {
-    font-weight: 200;
-    letter-spacing: 3px;
-  }
-
-  .flex {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  h5 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-`;
-  
-export const PomodoroCounter = c(pomodoroCounter);
 export const Pomodoro = c(pomodoro);
 customElements.define("atomico-pomodoro", Pomodoro);
-customElements.define("atomico-pomodoro-counter", PomodoroCounter);
