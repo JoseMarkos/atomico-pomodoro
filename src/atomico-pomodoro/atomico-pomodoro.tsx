@@ -6,7 +6,6 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   const [label, setLabel] = useState('Session');
   const {sessionTime, breakTime} = useContext(SettingsContext);
   const [timeLeft, setTimeLeft] = useState(sessionTime * 60); // Tiempo en segundos
-  console.log(timeLeft, "time left");
   const [timerActive, setTimerActive] = useState(0);
   const [breakT, setBreakT] = useState(breakTime);
   const [sessionT, setSessionT] = useState(sessionTime);
