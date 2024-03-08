@@ -45,13 +45,6 @@ pomodoroCounter.props = {
 }
 
 pomodoroCounter.styles = css`
-  :root {
-    --gray: #555;
-    --gray-75: #3b3b4f;
-    --gray-90: #222;
-    --btn-gap: 1px;
-  }
-
   .btn {
     background-color: transparent;
     border: 3px solid #555;
