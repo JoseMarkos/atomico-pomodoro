@@ -1,12 +1,10 @@
 import {c, css, Props, useState, useEffect, useContext} from 'atomico';
-import { SettingsContext, Theme } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+import { SettingsContext } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
 
 function pomodoro({ beep } : Props<typeof pomodoro>) {
   // Start Atomicity
   const [label, setLabel] = useState('Session');
   const {sessionTime, breakTime} = useContext(SettingsContext);
-  // const theme = useContext(Theme);
-  console.log( 'hola');
   const [timeLeft, setTimeLeft] = useState(sessionTime * 60); // Tiempo en segundos
   console.log(timeLeft, "time left");
   const [timerActive, setTimerActive] = useState(0);
