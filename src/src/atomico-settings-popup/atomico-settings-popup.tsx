@@ -1,5 +1,5 @@
 import { c, css, useContext, useState } from 'atomico';
-import { settingsContext } from '../atomico-pomodoro/atomico-pomodoro';
+import { SettingsContext } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
 
 const settingsPopup = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -8,7 +8,7 @@ const settingsPopup = () => {
     updateSessionTime, 
     sessionTime, 
     breakTime
-  } = useContext(settingsContext);
+  } = useContext(SettingsContext);
   const [sessionTimeLocal, setSessionTimeLocal] = useState(sessionTime);
   const [breakTimeLocal, setBreakTimeLocal] = useState(breakTime);
 
