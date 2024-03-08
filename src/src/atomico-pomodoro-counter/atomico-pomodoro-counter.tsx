@@ -1,6 +1,13 @@
 import {c, css, Props} from 'atomico';
 
-function pomodoroCounter({ id, title, decrement, number, increment }: Props<typeof pomodoroCounter>) {
+function pomodoroCounter(
+  { 
+    id, 
+    title, 
+    decrement, 
+    number, 
+    increment 
+  }: Props<typeof pomodoroCounter>) {
   return (
     <host shadowDom>
         <div class="counter" id={id}>
