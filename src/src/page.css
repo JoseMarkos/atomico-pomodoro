@@ -14,6 +14,7 @@ body {
 }
 
 body {
+  background-color: var(--gray-90);
   font-family: "Poppins", sans-serif;
 }
 
@@ -38,10 +39,10 @@ body {
 }
 
 .hojas {
-    top: 16px;
-    width: 150px;
-    left: 70px;
-    transform: rotate(22deg);
+  top: 16px;
+  width: 150px;
+  left: 70px;
+  transform: rotate(22deg);
 }
 .tomato,
 .hojas {
@@ -54,36 +55,40 @@ body {
 }
 
 .flex {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.flex--align-start {
+  align-items: flex-start;
+}
+.flex--justify-center {
+  justify-content: center;
+}
+
+
+body {
+  margin: 0;
+}
+
+.container {
+  font-family: sans;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.relative {
+  position: relative;
+  min-height: 271px;
+  width: 300px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
   }
-  .flex--align-start {
-    align-items: flex-start;
-  }
-  .flex--justify-center {
-    justify-content: center;
-  }
+
   .flex__item {
     flex: 50%;
   }
-
-  body {
-    margin: 0;
-  }
-  
-  #root {
-    /* margin-left: 120px; */
-  }
-  
-  .container {
-    background-color: var(--gray-90);  
-    font-family: sans;
-    /* padding-top: 6rem; */
-  }
-
-.relative {
-    position: relative;
-    min-height: 271px;
-    width: 300px;
-  }
+}
