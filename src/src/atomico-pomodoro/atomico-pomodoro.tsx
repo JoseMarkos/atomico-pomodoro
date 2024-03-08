@@ -46,7 +46,6 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
           } else {
             clearInterval(intervalId);
             playBeep();
-
             if ('Session' === label) {
               setLabel('Break');
 
@@ -56,8 +55,6 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
 
               return sessionT * 60;
             }
-
-            return 0;
           }
         });
       }, 1000);
