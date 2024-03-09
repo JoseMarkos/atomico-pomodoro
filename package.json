@@ -15,6 +15,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
+    "startHost": "vite --host",
     "build": "vite build",
     "create:component": "scaff component-tsx src"
   },
