@@ -4,8 +4,7 @@ from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
 
 enum TimerStatus {
   off,
-  on,
-  reset
+  on
 }
 
 function pomodoro({ beep } : Props<typeof pomodoro>) {
@@ -93,10 +92,6 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
 
   const stopTimer = () => {
     setTimerActive(TimerStatus.off);
-  };
-
-  const resetTimer = () => {
-    setTimerActive(TimerStatus.reset);
   };
   
   return (
