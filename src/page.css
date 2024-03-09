@@ -41,17 +41,18 @@ body {
 .hojas {
   top: 16px;
   width: 150px;
-  left: 70px;
+  left: 46px;
+  top: 28px;
   transform: rotate(22deg);
 }
 .tomato,
 .hojas {
   position: absolute;
-  top: 0;
 }
 
 .tomato {
-  width: 300px;
+  width: 150px;
+  top: 0;
 }
 
 .flex {
@@ -66,7 +67,6 @@ body {
   justify-content: center;
 }
 
-
 body {
   margin: 0;
 }
@@ -79,8 +79,12 @@ body {
 
 .relative {
   position: relative;
-  min-height: 271px;
-  width: 300px;
+  min-height: 150px;
+  width: 150px;
+}
+
+.hidden-mobile {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -90,5 +94,28 @@ body {
 
   .flex__item {
     flex: 50%;
+  }
+
+  .relative {
+    min-height: 271px;
+    width: 300px;
+  }
+
+  .tomato,
+  .hojas {
+    position: absolute;
+    top: 0;
+  }
+
+  .hojas {
+    left: 70px;
+  }
+
+  .hidden-desktop {
+    display: none;
+  }
+
+  .d-desktop {
+    display: block;
   }
 }

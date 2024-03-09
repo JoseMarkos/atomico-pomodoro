@@ -144,7 +144,7 @@ pomodoro.styles = css`
   :host {
     box-sizing: border-box;
     color: white;
-    padding: 2rem 1rem;
+    padding: 4rem 1rem 0 1rem;
     line-height: 1.1;
     display:flex;
     justify-content: center;
@@ -189,8 +189,8 @@ pomodoro.styles = css`
 
   .timer__body {
     background-color: #222;
-    height: 203px;
-    width: 203px;
+    height: 183px;
+    width: 183px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -204,8 +204,15 @@ pomodoro.styles = css`
   }
 
   @media (min-width: 768px) {
-     :host {
+    :host {
       min-height: 100vh;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .timer__body {
+      height: 203px;
+      width: 203px;
     }
   }
 `;
