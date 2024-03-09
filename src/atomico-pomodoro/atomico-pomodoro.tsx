@@ -75,6 +75,18 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     return () => clearInterval(intervalId);
   }, [timerActive]);
 
+  useEffect(
+    () => {
+      if (TimerStatus.off === timerActive) {
+        if ('Session' === label) {
+          setTimeLeft(sessionT);
+        } else {
+          setTimeLeft(breakT);
+        }
+        console.log('cambio breakT o sessionT', timerActive, TimerStatus.reset);
+      }
+    } ,[sessionT, breakT])
+
   const startTimer = () => {
     setTimerActive(TimerStatus.on);
   };
@@ -122,7 +134,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       id="reset"
                       onclick={() => {
                         pauseBeep();
-                        resetTimer();
+                        stopTimer();
                         if ('Session' === label) {
                           setTimeLeft(sessionT);
                         } else {
