@@ -121,8 +121,8 @@ settingsPopup.styles = css`
 
   .fixed {
     position: fixed;
-    right: 2rem;
-    top: 2rem;
+    right: 1rem;
+    top: 1rem;
     z-index: 2000;
   }
 `;
