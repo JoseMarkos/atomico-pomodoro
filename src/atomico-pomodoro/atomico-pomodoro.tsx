@@ -1,6 +1,6 @@
 import {c, css, Props, useState, useEffect, useContext} from 'atomico';
 import { SettingsContext } 
-                        from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
 
 enum TimerStatus {
   off,
@@ -102,11 +102,11 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   return (
     <host shadowDom>
         <atomico-settings-context value={{
-            updateBreakTime: updateBreakTime,
-            updateSessionTime: updateSessionTime,
-            sessionTime: sessionTime,
-            breakTime: breakTime,
-            timeLeft: timeLeft
+          updateBreakTime: updateBreakTime,
+          updateSessionTime: updateSessionTime,
+          sessionTime: sessionTime,
+          breakTime: breakTime,
+          timeLeft: timeLeft
         }}>
             <atomico-settings-popup></atomico-settings-popup>
             <div class="timer">
@@ -120,9 +120,9 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       id="start_stop"
                       onclick={() => {
                           startTimer();
+                          pauseBeep();
                         }
-                      }
-                    >
+                      }>
                       {0 > timeLeft 
                           ? <i class="fa fa-pause">Pause</i> 
                           : <i class="fa fa-play">Play</i>
@@ -140,8 +140,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                         } else {
                           setTimeLeft(breakT);
                         }
-                      }}
-                    >
+                      }}>
                       <i class="fa fa-arrow-rotate-right">R</i>
                     </button>
                 </section>
@@ -229,13 +228,10 @@ pomodoro.styles = css`
   }
 `;
 
-// const beepAudioElement = new Audio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav');
-const beepAudioElement = new Audio('./src/oversimplified-alarm-clock-113180.mp3');
-
 pomodoro.props = {
   beep: {
     type: HTMLAudioElement,
-    value: beepAudioElement
+    value: new Audio('./src/oversimplified-alarm-clock-113180.mp3')
   } 
 }
 
