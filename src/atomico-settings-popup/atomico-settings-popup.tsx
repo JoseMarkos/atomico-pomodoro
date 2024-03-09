@@ -135,5 +135,4 @@ settingsPopup.styles = css`
 `;
 
 export const SettingsPopup = c(settingsPopup);
-
 customElements.define("atomico-settings-popup", SettingsPopup);
