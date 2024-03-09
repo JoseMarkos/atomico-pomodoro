@@ -1,22 +1,29 @@
 import {c, css, Props, useState, useEffect, useContext} from 'atomico';
-import { SettingsContext } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+import { SettingsContext } 
+                        from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+
+enum TimerStatus {
+  off,
+  on,
+  reset
+}
 
 function pomodoro({ beep } : Props<typeof pomodoro>) {
   // Start Atomicity
-  const [label, setLabel] = useState('Session');
+  const [label, setLabel] = useState('Break');
   const {sessionTime, breakTime} = useContext(SettingsContext);
-  const [timeLeft, setTimeLeft] = useState(sessionTime * 60); // Tiempo en segundos
-  const [timerActive, setTimerActive] = useState(0);
-  const [breakT, setBreakT] = useState(breakTime);
-  const [sessionT, setSessionT] = useState(sessionTime);
+  const [timeLeft, setTimeLeft] = useState(breakTime);
+  const [timerActive, setTimerActive] = useState(TimerStatus.off);
+  const [breakT, setBreakT] = useState(breakTime * 60);
+  const [sessionT, setSessionT] = useState(sessionTime * 60);
   // End Atomicity
   
   const updateBreakTime = (time: number) => {
-    setBreakT(time);
+    setBreakT(time * 60);
   };
 
   const updateSessionTime = (time: number) => {
-    setSessionT(time);
+    setSessionT(time * 60);
   };
  
   const timeFormat = () => {
@@ -36,8 +43,9 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   };
 
   useEffect(() => {
+    console.log('cambio timer active', timerActive);
     let intervalId: number;
-    if (timerActive) {
+    if (TimerStatus.on === timerActive) {
       intervalId = setInterval(() => {
         setTimeLeft((prevTime) => {
           if (prevTime > 0) {
@@ -45,41 +53,38 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
           } else {
             clearInterval(intervalId);
             playBeep();
-            setTimerActive(0);
-            if ('Session' === label) {
-              setLabel('Break');
-
-              return breakT * 60;
-            } else {
-              setLabel('Session');
-
-              return sessionT * 60;
-            }
+            setTimerActive(TimerStatus.off);
+            return 0;
           }
         });
       }, 1000);
+      console.log('despues del interval')
+    } 
+    if (TimerStatus.off === timerActive) {
+      console.log("sessionT al final", sessionT);
+      console.log("breakT al final", breakT);
+      if ('Session' === label) {
+        setTimeLeft(breakT);
+        setLabel('Break');
+      } else {
+        setTimeLeft(sessionT);
+        setLabel('Session');
+      }
     }
 
     return () => clearInterval(intervalId);
   }, [timerActive]);
 
-  useEffect(() => {
-    if (timerActive) {
-      return;
-    }
-    if ('Session' === label) {
-      setTimeLeft(sessionT * 60);
-    } else {
-      setTimeLeft(breakT * 60);
-    }
-  },[sessionT, breakT]);
-
   const startTimer = () => {
-    setTimerActive(timerActive + 1);
+    setTimerActive(TimerStatus.on);
   };
 
   const stopTimer = () => {
-    setTimerActive(0);
+    setTimerActive(TimerStatus.off);
+  };
+
+  const resetTimer = () => {
+    setTimerActive(TimerStatus.reset);
   };
   
   return (
@@ -103,7 +108,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       id="start_stop"
                       onclick={() => {
                           startTimer();
-                          }
+                        }
                       }
                     >
                       {0 > timeLeft 
@@ -117,8 +122,12 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       id="reset"
                       onclick={() => {
                         pauseBeep();
-                        stopTimer();
-                        setTimeLeft(sessionT * 60);
+                        resetTimer();
+                        if ('Session' === label) {
+                          setTimeLeft(sessionT);
+                        } else {
+                          setTimeLeft(breakT);
+                        }
                       }}
                     >
                       <i class="fa fa-arrow-rotate-right">R</i>
