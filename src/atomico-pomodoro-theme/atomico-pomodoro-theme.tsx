@@ -1,8 +1,8 @@
 import { createContext} from 'atomico';
 
 export const SettingsContext = createContext({
-    breakTime: 1,
-    sessionTime: 2,
+    breakTime: 5,
+    sessionTime: 25,
     updateBreakTime: (time: number) => {
     },
     updateSessionTime: (time: number) => {
