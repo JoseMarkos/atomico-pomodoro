@@ -125,6 +125,13 @@ settingsPopup.styles = css`
     top: 1rem;
     z-index: 2000;
   }
+
+  @media (min-width: 768px) {
+    .fixed {
+      right: 2rem;
+      top: 2rem;
+    }
+  }
 `;
 
 export const SettingsPopup = c(settingsPopup);
