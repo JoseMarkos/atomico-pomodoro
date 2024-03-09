@@ -24,7 +24,7 @@ const settingsPopup = () => {
     <host shadowDom>
       <button class="fixed" onclick={togglePopup}>Configurar</button>
       <dialog open={showPopup} onclose={closePopup} class="">
-        <h2>Configuración</h2>
+        <h2>Settings</h2>
         <section class="flex">
             <atomico-pomodoro-counter 
               id="session"
