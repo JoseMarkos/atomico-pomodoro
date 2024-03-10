@@ -22,7 +22,7 @@ const settingsPopup = () => {
 
   return (
     <host shadowDom>
-      <button class="fixed" onclick={togglePopup}>Configurar</button>
+      <button class="fixed" onclick={togglePopup}>Settings</button>
       <dialog open={showPopup} onclose={closePopup} class="">
         <h2>Settings</h2>
         <section class="flex">
