@@ -7,11 +7,17 @@ enum TimerStatus {
   on
 }
 
+enum Mode {
+  session,
+  break
+}
+
 function pomodoro({ beep } : Props<typeof pomodoro>) {
   // Start Atomicity
-  const [label, setLabel] = useState('Break');
+  const [label, setLabel] = useState('Session');
+  const [mode, setMode] = useState(Mode.session);
   const {sessionTime, breakTime} = useContext(SettingsContext);
-  const [timeLeft, setTimeLeft] = useState(breakTime);
+  const [timeLeft, setTimeLeft] = useState(sessionTime);
   const [timerActive, setTimerActive] = useState(TimerStatus.off);
   const [breakT, setBreakT] = useState(breakTime * 60);
   const [sessionT, setSessionT] = useState(sessionTime * 60);
@@ -41,8 +47,17 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     beep.pause();
   };
 
+  const toggleMode = () => {
+    if (Mode.session === mode) {
+      setMode(Mode.break);
+    } else {
+      setMode(Mode.session);
+    }
+  };
+
   useEffect(() => {
     console.log('cambio timer active', timerActive);
+    console.log(mode, 'modo es ');
     let intervalId: number;
     if (TimerStatus.on === timerActive) {
       intervalId = setInterval(() => {
@@ -53,6 +68,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
             clearInterval(intervalId);
             playBeep();
             setTimerActive(TimerStatus.off);
+            toggleMode();
             return 0;
           }
         });
@@ -62,12 +78,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     if (TimerStatus.off === timerActive) {
       console.log("sessionT al final", sessionT);
       console.log("breakT al final", breakT);
-      if ('Session' === label) {
-        setTimeLeft(breakT);
-        setLabel('Break');
-      } else {
+      if (Mode.session === mode) {
         setTimeLeft(sessionT);
-        setLabel('Session');
+      } else {
+        setTimeLeft(breakT);
       }
     }
 
@@ -77,14 +91,25 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   useEffect(
     () => {
       if (TimerStatus.off === timerActive) {
-        if ('Session' === label) {
+        if (Mode.session === mode) {
           setTimeLeft(sessionT);
         } else {
           setTimeLeft(breakT);
         }
-        console.log('cambio breakT o sessionT', timerActive, TimerStatus.reset);
+        console.log('cambio breakT o sessionT', timerActive);
       }
-    } ,[sessionT, breakT])
+    } ,[sessionT, breakT]);
+
+  useEffect(
+    () => {
+      if (Mode.session === mode) {
+        setLabel('Session');
+      } else {
+        setLabel('Break');
+      }
+    },
+    [mode]
+  );
 
   const startTimer = () => {
     setTimerActive(TimerStatus.on);
@@ -130,7 +155,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       onclick={() => {
                         pauseBeep();
                         stopTimer();
-                        if ('Session' === label) {
+                        if (Mode.session === mode) {
                           setTimeLeft(sessionT);
                         } else {
                           setTimeLeft(breakT);
