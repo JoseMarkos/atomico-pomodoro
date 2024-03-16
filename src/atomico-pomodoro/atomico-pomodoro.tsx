@@ -107,21 +107,16 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
           setTimeLeft(sessionT);
         else
           setTimeLeft(breakT);
-      
-        console.log('cambio breakT o sessionT', timerActive);
       }
     } ,[sessionT, breakT]);
 
   useEffect(
     () => {
-      if (Mode.session === mode) {
+      if (Mode.session === mode)
         setLabel('Session');
-      } else {
+      else
         setLabel('Break');
-      }
-    },
-    [mode]
-  );
+    }, [mode]);
 
   const startTimer = () => {
     setTimerActive(TimerStatus.on);
@@ -169,11 +164,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       onclick={() => {
                         pauseBeep();
                         stopTimer();
-                        if (Mode.session === mode) {
+                        if (Mode.session === mode)
                           setTimeLeft(sessionT);
-                        } else {
+                        else
                           setTimeLeft(breakT);
-                        }
                       }}>
                       <i class="fa fa-arrow-rotate-right">R</i>
                     </button>
