@@ -1,6 +1,7 @@
 import {c, css, Props, useState, useEffect, useContext} from 'atomico';
 import { SettingsContext } 
-from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+  from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+import alert from '../helpers/alert';
 
 enum TimerStatus {
   off,
@@ -8,8 +9,8 @@ enum TimerStatus {
 }
 
 enum Mode {
-  session,
-  break
+  session = 'Session',
+  break = 'Break'
 }
 
 function pomodoro({ beep } : Props<typeof pomodoro>) {
@@ -69,6 +70,11 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
             playBeep();
             setTimerActive(TimerStatus.off);
             toggleMode();
+            if (Mode.session === mode) {
+              alert('¡Vamos allá! Empieza tu sesión productiva.');
+            } else {
+              alert('Tómate un descanso merecido. Recarga para la próxima sesión.');
+            }
             return 0;
           }
         });
