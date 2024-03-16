@@ -5,7 +5,8 @@ import alert from '../helpers/alert';
 
 enum TimerStatus {
   off,
-  on
+  on,
+  pause
 }
 
 enum Mode {
@@ -49,16 +50,22 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   };
 
   const toggleMode = () => {
-    if (Mode.session === mode) {
+    if (Mode.session === mode)
       setMode(Mode.break);
-    } else {
+    else
       setMode(Mode.session);
+  };
+
+  const togglePauseTimerActive = () => {
+    pauseBeep();
+    if (TimerStatus.on === timerActive) {
+      pauseTimer();
+    } else {
+      startTimer();
     }
   };
 
   useEffect(() => {
-    console.log('cambio timer active', timerActive);
-    console.log(mode, 'modo es ');
     let intervalId: number;
     if (TimerStatus.on === timerActive) {
       intervalId = setInterval(() => {
@@ -82,13 +89,14 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
       console.log('despues del interval')
     } 
     if (TimerStatus.off === timerActive) {
-      console.log("sessionT al final", sessionT);
-      console.log("breakT al final", breakT);
       if (Mode.session === mode) {
         setTimeLeft(sessionT);
       } else {
         setTimeLeft(breakT);
       }
+    }
+    if (TimerStatus.pause === timerActive) {
+      clearInterval(intervalId);
     }
 
     return () => clearInterval(intervalId);
@@ -97,11 +105,11 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   useEffect(
     () => {
       if (TimerStatus.off === timerActive) {
-        if (Mode.session === mode) {
+        if (Mode.session === mode)
           setTimeLeft(sessionT);
-        } else {
+        else
           setTimeLeft(breakT);
-        }
+      
         console.log('cambio breakT o sessionT', timerActive);
       }
     } ,[sessionT, breakT]);
@@ -125,6 +133,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
     setTimerActive(TimerStatus.off);
   };
   
+  const pauseTimer = () => {
+    setTimerActive(TimerStatus.pause);
+  };
+  
   return (
     <host shadowDom>
         <atomico-settings-context value={{
@@ -144,12 +156,10 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       class="btn btn--control"
                       type="button"
                       id="start_stop"
-                      onclick={() => {
-                          startTimer();
-                          pauseBeep();
-                        }
+                      onclick={
+                        togglePauseTimerActive
                       }>
-                      {0 > timeLeft 
+                      {TimerStatus.on === timerActive
                           ? <i class="fa fa-pause">Pause</i> 
                           : <i class="fa fa-play">Play</i>
                       }
