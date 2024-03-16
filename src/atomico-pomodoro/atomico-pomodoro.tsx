@@ -77,23 +77,21 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
             playBeep();
             setTimerActive(TimerStatus.off);
             toggleMode();
-            if (Mode.session === mode) {
-              alert('¡Vamos allá! Empieza tu sesión productiva.');
-            } else {
+            if (Mode.session === mode)
               alert('Tómate un descanso merecido. Recarga para la próxima sesión.');
-            }
+            else
+              alert('¡Vamos allá! Empieza tu sesión productiva.');
+
             return 0;
           }
         });
       }, 1000);
-      console.log('despues del interval')
     } 
     if (TimerStatus.off === timerActive) {
-      if (Mode.session === mode) {
+      if (Mode.session === mode)
         setTimeLeft(sessionT);
-      } else {
+      else
         setTimeLeft(breakT);
-      }
     }
     if (TimerStatus.pause === timerActive) {
       clearInterval(intervalId);
