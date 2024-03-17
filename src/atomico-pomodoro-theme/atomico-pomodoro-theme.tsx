@@ -1,4 +1,4 @@
-import { createContext} from 'atomico';
+import { createContext, useState } from 'atomico';
 
 export const SettingsContext = createContext({
     breakTime: 5,

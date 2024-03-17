@@ -9,8 +9,16 @@ const settingsPopup = () => {
     sessionTime, 
     breakTime
   } = useContext(SettingsContext);
-  const [sessionTimeLocal, setSessionTimeLocal] = useState(sessionTime);
-  const [breakTimeLocal, setBreakTimeLocal] = useState(breakTime);
+  const [sessionTimeLocal, setSessionTimeLocal] = useState(
+    localStorage.getItem('sessionTime') 
+      ? parseInt(localStorage.getItem('sessionTime')) / 60
+      : sessionTime
+  );
+  const [breakTimeLocal, setBreakTimeLocal] = useState(
+    localStorage.getItem('breakTime') 
+      ? parseInt(localStorage.getItem('breakTime')) / 60
+      : breakTime
+  );
 
   const togglePopup = () => {
     setShowPopup(!showPopup);

@@ -21,16 +21,26 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   const {sessionTime, breakTime} = useContext(SettingsContext);
   const [timeLeft, setTimeLeft] = useState(sessionTime);
   const [timerActive, setTimerActive] = useState(TimerStatus.off);
-  const [breakT, setBreakT] = useState(breakTime * 60);
-  const [sessionT, setSessionT] = useState(sessionTime * 60);
+  const [breakT, setBreakT] = useState(
+    localStorage.getItem('breakTime') 
+      ? parseInt(localStorage.getItem('breakTime')) 
+      : breakTime * 60
+  );
+  const [sessionT, setSessionT] = useState(
+    localStorage.getItem('sessionTime') 
+      ? parseInt(localStorage.getItem('sessionTime')) 
+      : sessionTime * 60
+  );
   // End Atomicity
   
   const updateBreakTime = (time: number) => {
     setBreakT(time * 60);
+    localStorage.setItem('breakTime', (time * 60).toString());
   };
 
   const updateSessionTime = (time: number) => {
     setSessionT(time * 60);
+    localStorage.setItem('sessionTime', (time * 60).toString());
   };
  
   const timeFormat = () => {
