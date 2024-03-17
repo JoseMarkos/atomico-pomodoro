@@ -58,11 +58,17 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
 
   const togglePauseTimerActive = () => {
     pauseBeep();
-    if (TimerStatus.on === timerActive) {
+    if (TimerStatus.on === timerActive)
       pauseTimer();
-    } else {
+    else
       startTimer();
-    }
+  };
+
+  const showAlert = () => {
+    if (Mode.session === mode)
+      alert('Tómate un descanso merecido. Recarga para la próxima sesión.');
+    else
+      alert('¡Vamos allá! Empieza tu sesión productiva.');
   };
 
   useEffect(() => {
@@ -77,10 +83,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
             playBeep();
             setTimerActive(TimerStatus.off);
             toggleMode();
-            if (Mode.session === mode)
-              alert('Tómate un descanso merecido. Recarga para la próxima sesión.');
-            else
-              alert('¡Vamos allá! Empieza tu sesión productiva.');
+            showAlert();
 
             return 0;
           }
@@ -153,8 +156,8 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                         togglePauseTimerActive
                       }>
                       {TimerStatus.on === timerActive
-                          ? <i class="fa fa-pause">Pause</i> 
-                          : <i class="fa fa-play">Play</i>
+                          ? <slot name="icon-pause"></slot>
+                          : <slot name="icon-play"></slot>
                       }
                     </button>
                     <button
@@ -162,14 +165,14 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
                       type="button"
                       id="reset"
                       onclick={() => {
-                        pauseBeep();
+                        pauseBeep();  
                         stopTimer();
                         if (Mode.session === mode)
                           setTimeLeft(sessionT);
                         else
                           setTimeLeft(breakT);
                       }}>
-                      <i class="fa fa-arrow-rotate-right">R</i>
+                      <slot name="icon-rotate"></slot>
                     </button>
                 </section>
                 </div>
