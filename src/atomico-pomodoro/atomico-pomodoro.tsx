@@ -31,7 +31,11 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
       ? parseInt(localStorage.getItem('sessionTime')) 
       : sessionTime * 60
   );
-  const [notifications, setNotifications] = useState(notificationsOn);
+  const [notifications, setNotifications] = useState(
+    localStorage.getItem('notifications')
+      ? 'true' === localStorage.getItem('notifications')
+      : notificationsOn
+  );
   // End Atomicity
   
   const updateBreakTime = (time: number) => {

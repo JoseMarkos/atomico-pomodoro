@@ -22,20 +22,21 @@ const settingsPopup = () => {
       ? parseInt(localStorage.getItem('breakTime')) / 60
       : breakTime
   );
-  const [notifications, setNotifications] = useState(notificationsOn);
+  const [notifications, setNotifications] = useState(
+    localStorage.getItem('notifications')
+      ? 'true' === localStorage.getItem('notifications')
+      : notificationsOn
+  );
   useEffect(() => {
     if (notifications) {
       requestPermission();
-      console.log('true??', notifications)
     }
-    console.log('cambio en notifications', notifications)
   }, [notifications]);
 
   const updateNotificationsLocal = (event) => {
     const on = event.target.value === 'true';
     setNotifications(on);
     updateNotifications(on)
-    console.log(event.target.value);
   };
 
   const togglePopup = () => {
