@@ -1,7 +1,7 @@
 import {c, css, Props, useState, useEffect, useContext} from 'atomico';
-import { SettingsContext } 
+import { SettingsContext }
   from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
-import alert from '../helpers/alert';
+import {alert, requestPermission} from '../helpers/alert';
 
 enum TimerStatus {
   off,
@@ -18,7 +18,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
   // Start Atomicity
   const [label, setLabel] = useState('Session');
   const [mode, setMode] = useState(Mode.session);
-  const {sessionTime, breakTime} = useContext(SettingsContext);
+  const {sessionTime, breakTime, notificationsOn } = useContext(SettingsContext);
   const [timeLeft, setTimeLeft] = useState(sessionTime);
   const [timerActive, setTimerActive] = useState(TimerStatus.off);
   const [breakT, setBreakT] = useState(

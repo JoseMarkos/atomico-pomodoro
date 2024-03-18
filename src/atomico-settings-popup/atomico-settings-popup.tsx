@@ -1,13 +1,16 @@
-import { c, css, useContext, useState } from 'atomico';
+import { c, css, useContext, useEffect, useState } from 'atomico';
 import { SettingsContext } from '../atomico-pomodoro-theme/atomico-pomodoro-theme';
+import { requestPermission } from '../helpers/alert';
 
 const settingsPopup = () => {
   const [showPopup, setShowPopup] = useState(false);
   const {
     updateBreakTime, 
-    updateSessionTime, 
+    updateSessionTime,
+    updateNotifications,
     sessionTime, 
-    breakTime
+    breakTime,
+    notificationsOn
   } = useContext(SettingsContext);
   const [sessionTimeLocal, setSessionTimeLocal] = useState(
     localStorage.getItem('sessionTime') 
@@ -19,6 +22,21 @@ const settingsPopup = () => {
       ? parseInt(localStorage.getItem('breakTime')) / 60
       : breakTime
   );
+  const [notifications, setNotifications] = useState(notificationsOn);
+  useEffect(() => {
+    if (notifications) {
+      requestPermission();
+      console.log('true??', notifications)
+    }
+    console.log('cambio en notifications', notifications)
+  }, [notifications]);
+
+  const updateNotificationsLocal = (event) => {
+    const on = event.target.value === 'true';
+    setNotifications(on);
+    updateNotifications(on)
+    console.log(event.target.value);
+  };
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -68,6 +86,29 @@ const settingsPopup = () => {
               }
               number={breakTimeLocal}
             />
+        </section>
+        <section>
+          <h3>Notifications</h3>
+          <label>
+            <input
+              type="radio"
+              value="true"
+              name="notifications"
+              checked={notifications === true}
+              onchange={updateNotificationsLocal}
+            />
+            On
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="false"
+              name="notifications"
+              checked={notifications === false}
+              onchange={updateNotificationsLocal}
+            />
+            Off
+          </label>
         </section>
         <button class="btn--block" onclick={closePopup}>Cerrar</button>
       </dialog>
