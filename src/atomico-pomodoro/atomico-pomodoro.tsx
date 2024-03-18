@@ -135,10 +135,7 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
 
   useEffect(
     () => {
-      if (Mode.session === mode)
-        setLabel('Session');
-      else
-        setLabel('Break');
+      setLabel(mode);
     }, [mode]);
 
   const startTimer = () => {
