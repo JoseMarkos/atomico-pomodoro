@@ -3,9 +3,12 @@ import { createContext, useState } from 'atomico';
 export const SettingsContext = createContext({
     breakTime: 5,
     sessionTime: 25,
+    notificationsOn: false,
     updateBreakTime: (time: number) => {
     },
     updateSessionTime: (time: number) => {
+    },
+    updateNotifications: (on: boolean) => {
     }
 });
 

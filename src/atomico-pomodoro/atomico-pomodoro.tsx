@@ -31,16 +31,20 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
       ? parseInt(localStorage.getItem('sessionTime')) 
       : sessionTime * 60
   );
+  const [notifications, setNotifications] = useState(notificationsOn);
   // End Atomicity
   
   const updateBreakTime = (time: number) => {
     setBreakT(time * 60);
     localStorage.setItem('breakTime', (time * 60).toString());
   };
-
   const updateSessionTime = (time: number) => {
     setSessionT(time * 60);
     localStorage.setItem('sessionTime', (time * 60).toString());
+  };
+  const updateNotifications = (on: boolean) => {
+    setNotifications(on);
+    localStorage.setItem('notifications', on.toString());
   };
  
   const timeFormat = () => {
@@ -93,7 +97,9 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
             playBeep();
             setTimerActive(TimerStatus.off);
             toggleMode();
-            showAlert();
+            if (notifications) {
+              showAlert();
+            }
 
             return 0;
           }
@@ -148,9 +154,11 @@ function pomodoro({ beep } : Props<typeof pomodoro>) {
         <atomico-settings-context value={{
           updateBreakTime: updateBreakTime,
           updateSessionTime: updateSessionTime,
+          updateNotifications: updateNotifications,
           sessionTime: sessionTime,
           breakTime: breakTime,
-          timeLeft: timeLeft
+          timeLeft: timeLeft,
+          notificationsOn: notificationsOn
         }}>
             <atomico-settings-popup></atomico-settings-popup>
             <div class="timer">
