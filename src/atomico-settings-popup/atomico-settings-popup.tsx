@@ -47,6 +47,16 @@ const settingsPopup = () => {
     setShowPopup(false);
   };
 
+  const updateSessionTimes = (time: number) => {
+    setSessionTimeLocal(time);
+    updateSessionTime(time);
+  };
+
+  const updateBreakTimes = (time: number) => {
+    setBreakTimeLocal(time);
+    updateBreakTime(time);
+  };
+
   return (
     <host shadowDom>
       <button class="fixed" onclick={togglePopup}>Settings</button>
@@ -58,14 +68,12 @@ const settingsPopup = () => {
               title="Session Length"
               increment={
                 () => {
-                  setSessionTimeLocal(sessionTimeLocal + 1)
-                  updateSessionTime(sessionTimeLocal + 1);
+                  updateSessionTimes(sessionTimeLocal + 1)
                 }
               }
               decrement={
                 () => {
-                  setSessionTimeLocal(sessionTimeLocal - 1)
-                  updateSessionTime(sessionTimeLocal - 1);
+                  updateSessionTimes(sessionTimeLocal - 1)
                 }
               }
               number={sessionTimeLocal}
@@ -75,14 +83,12 @@ const settingsPopup = () => {
               title="Break Length"
               increment={
                 () => {
-                  setBreakTimeLocal(breakTimeLocal + 1)
-                  updateBreakTime(breakTimeLocal + 1)
+                  updateBreakTimes(breakTimeLocal + 1)
                 }
               }
               decrement={
                 () => {
-                  setBreakTimeLocal(breakTimeLocal - 1)
-                  updateBreakTime(breakTimeLocal - 1)
+                  updateBreakTimes(breakTimeLocal - 1)
                 }
               }
               number={breakTimeLocal}
